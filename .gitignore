@@ -1,1 +1,14 @@
+### Python ###
+__pycache__/
+__pypackages__/
+env/
+venv/
 .python-version
+.env
+.venv
+
+# PyCharm
+.idea/
+
+### VisualStudioCode ###
+.vscode/

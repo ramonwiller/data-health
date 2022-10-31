@@ -1,0 +1,47 @@
+services:
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    env_file:
+      - .env
+    volumes:
+      - /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - datahealth
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 30s
+      retries: 5
+    restart: always
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    env_file:
+      - .env
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+    networks:
+      - datahealth
+
+  alembic:
+    container_name: alembic
+    build: .
+    command: "alembic upgrade head"
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    links: 
+      - postgres
+    networks:
+      - datahealth
+
+networks:
+  datahealth:
+    driver: bridge
