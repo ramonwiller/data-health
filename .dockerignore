@@ -1,0 +1,14 @@
+.git/
+__pycache__/
+alembic/versions/__pycache__/
+env/
+venv/
+.vscode/
+.idea/
+.env
+.gitignore
+.python-version
+README.md
+Dockerfile
+docker-compose.yml
+.dockerignore
